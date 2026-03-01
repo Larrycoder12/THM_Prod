@@ -42,6 +42,10 @@ sources/0 = SubResource("TileSetAtlasSource_04qyp")
 font = ExtResource("6_j7wrs")
 font_size = 8
 
+[sub_resource type="LabelSettings" id="LabelSettings_fws66"]
+font = ExtResource("6_j7wrs")
+font_size = 8
+
 [node name="Node2D2" type="Node2D" unique_id=1713976250]
 script = ExtResource("1_4vge2")
 
@@ -71,3 +75,9 @@ text = "M Coins: 0
 U Coins: 0
 Ram: 0"
 label_settings = SubResource("LabelSettings_j7wrs")
+
+[node name="StatusLabel" type="Label" parent="CanvasLayer" unique_id=66471062]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Label"
+label_settings = SubResource("LabelSettings_fws66")

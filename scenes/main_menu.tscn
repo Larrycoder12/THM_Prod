@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cn7hix58oennl" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Texture2D" uid="uid://bwh3g2x1kobkf" path="res://assets/start-button.png" id="2_bqqt6"]
+[ext_resource type="Script" uid="uid://drvkiiraa0x4l" path="res://scenes/button_manager.gd" id="2_wu84c"]
 [ext_resource type="Texture2D" uid="uid://b1ieml5rquk6r" path="res://assets/quit-button.png" id="3_wu84c"]
 
 [node name="main menu" type="Node2D" unique_id=1688323690]
@@ -12,6 +13,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("2_wu84c")
 
 [node name="Start" type="Button" parent="Button Manager" unique_id=262307419]
 layout_mode = 0

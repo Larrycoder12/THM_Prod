@@ -10,14 +10,19 @@ const JUMP_VELOCITY = -150.0
 const BREAK_THRESHOLD = 120.0 
 const DEFAULT_HEALTH = 100.0
 const SLAM_VELOCITY = 300
-
+var player_resources = {};
 var tile_health = {}
 var slamming = false
 const GRAVITY = 400
 
+var m_coins = 0
+var u_coins = 0
+var ram = 0
+
+
+@onready var label: Label = $"../CanvasLayer/Label"
 func _physics_process(delta: float) -> void:
 	var pre_collision_velocity = velocity
-
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
 	if is_on_floor():
@@ -86,5 +91,23 @@ func take_tile_damage(layer: TileMapLayer, map_pos: Vector2i, damage: float):
 	tile_health[map_pos] -= damage
 	
 	if tile_health[map_pos] <= 0:
+		var atlas_coords = layer.get_cell_atlas_coords(map_pos)
 		layer.erase_cell(map_pos)
 		tile_health.erase(map_pos)
+		print(atlas_coords)
+		match atlas_coords:
+			Vector2i(0, 0): 
+				u_coins += 1
+				print("U coin added")
+			Vector2i(0, 1): 
+				m_coins += 1
+				print("M coin added")
+			Vector2i(0, 2), Vector2i(1, 2): 
+				ram += 1
+				print("RAM coin added") 
+		label.text = "M Coins: " + str(m_coins) + "\nU Coins: " + str(u_coins) + "\nRAM: " + str(ram)
+
+		
+		## Assuming the script is attached to the parent of the Label node
+#func update_score(new_score):
+ #   $LabelNodeName.text = "Score: " + str(new_score) #

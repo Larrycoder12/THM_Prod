@@ -44,6 +44,3 @@ tile_set = SubResource("TileSet_04qyp")
 
 [node name="Player" parent="." unique_id=1009281542 instance=ExtResource("1_6e84v")]
 position = Vector2(88, 75)
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=151735662]
-position = Vector2(160, 90)

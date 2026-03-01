@@ -16,3 +16,6 @@ texture = ExtResource("2_g2els")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=259260269]
 position = Vector2(-1, 0)
 shape = SubResource("CapsuleShape2D_qhqgy")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=966553553]
+drag_vertical_enabled = true

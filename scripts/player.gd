@@ -49,16 +49,16 @@ func _physics_process(delta: float) -> void:
 				if collider.get_cell_source_id(map_pos) != -1:
 					break_block(collider, map_pos)
 		
-		if abs(n.x) > abs(n.y):
-			if n.x > 0: 
-				velocity.x += BOUNCE
-			else: 
-				velocity.x -= BOUNCE
-		else:
-			if n.y > 0: 
-				velocity.y += BOUNCE
-			else: 
-				velocity.y = -1 * BOUNCE * 4
+					if abs(n.x) > abs(n.y):
+						if n.x > 0: 
+							velocity.x += BOUNCE
+						else: 
+							velocity.x -= BOUNCE
+					else:
+						if n.y > 0: 
+							velocity.y += BOUNCE
+						else: 
+							velocity.y = -1 * BOUNCE * 4
 
 func break_block(layer: TileMapLayer, map_pos: Vector2i):
 	layer.erase_cell(map_pos)

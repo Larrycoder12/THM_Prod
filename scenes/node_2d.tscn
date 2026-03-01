@@ -1,23 +1,33 @@
-[gd_scene format=3 uid="uid://3jb56obc2by"]
+[gd_scene format=4 uid="uid://3jb56obc2by"]
 
 [ext_resource type="PackedScene" uid="uid://btcbpsojydtv6" path="res://scenes/player.tscn" id="1_6e84v"]
-[ext_resource type="Texture2D" uid="uid://d13m2012owiqw" path="res://assets/moon-dirt.png" id="2_4dvvg"]
+[ext_resource type="Texture2D" uid="uid://dkv5g5jjrl1af" path="res://assets/SpriteSheet.png" id="2_4dvvg"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6e84v"]
-size = Vector2(170, 35)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rnjyy"]
+texture = ExtResource("2_4dvvg")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+
+[sub_resource type="TileSet" id="TileSet_4vge2"]
+tile_size = Vector2i(8, 8)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_rnjyy")
 
 [node name="Node2D" type="Node2D" unique_id=1713976250]
 
 [node name="Player" parent="." unique_id=1009281542 instance=ExtResource("1_6e84v")]
 position = Vector2(109, 14)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=883846706]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=398901357]
+tile_map_data = PackedByteArray("AAAHAAMAAAABAAAAAAAIAAMAAAABAAAAAAAJAAMAAAABAAAAAAAKAAMAAAABAAAAAAALAAMAAAABAAAAAAAMAAMAAAABAAAAAAANAAMAAAABAAAAAAAOAAMAAAABAAAAAAAPAAMAAAABAAAAAAAQAAMAAAABAAAAAAARAAMAAAABAAAAAAASAAMAAAABAAAAAAATAAMAAAABAAAAAAAUAAMAAAABAAAAAAAVAAMAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_4vge2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1874300827]
-position = Vector2(200, 192)
-shape = SubResource("RectangleShape2D_6e84v")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=344818198]
-position = Vector2(200, 240.00003)
-scale = Vector2(21.605467, 16.951395)
-texture = ExtResource("2_4dvvg")

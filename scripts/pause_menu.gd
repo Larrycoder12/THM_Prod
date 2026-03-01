@@ -4,7 +4,7 @@ func _ready():
 	hide()
 	get_tree().paused = false
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("esc"):
 		if get_tree().paused:
 			resume()

@@ -5,6 +5,8 @@ const ACCELERATION = 200
 const MAX_VELOCITY = 200
 const BOUNCE = 40
 const JETPACK_VELOCITY = -80.0
+const SPEED = 100.0
+const JUMP_VELOCITY = -150.0
 
 
 func _physics_process(delta: float) -> void:

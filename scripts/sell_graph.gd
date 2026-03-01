@@ -13,7 +13,7 @@ var rng = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 
 func reveal_columns():
-	var prices = generate_prices_mooncoin(12)
+	var prices = generate_prices_ubercoin(5)
 	var matrix = make_zero_matrix()
 	
 	var prev = prices[0]
@@ -71,6 +71,36 @@ func generate_prices_mooncoin(init_price) -> Array:
 	for i in range(W - 1):
 		prices.append(clamp(prev_price + fluct, 1, H))
 		fluct += rng.randi_range(-sqrt(i), sqrt(i + 1))
+	
+	return prices
+
+func generate_prices_ubercoin(init_price) -> Array:
+	var prices: Array = []
+	var fluct = rng.randi_range(-1, 6)
+	var crash_chance = rng.randi_range(0, 4)
+	var crashed = false
+	var threshold = rng.randi_range(3, 5)
+	
+	prices.append(init_price)
+	
+	var prev_price = init_price
+	for i in range(W - 1):
+		if not crashed:
+			if (rng.randi_range(0, 120) < crash_chance or prev_price >= 31) and i > threshold:
+				prices.append(0)
+				crashed = true
+			else:
+				var price = prev_price + fluct
+				prices.append(clamp(price, 1, H))
+				fluct = rng.randi_range(-1, i + 4)
+				prev_price = price
+				print(crash_chance)
+				if price > 21:
+					crash_chance += rng.randi_range(0, 32)
+				else:
+					crash_chance += rng.randi_range(0, i * 1.5)
+		else:
+			prices.append(0)
 	
 	return prices
 

@@ -1,19 +1,28 @@
 extends Control
-func resume():
-	get_tree().paused=false
-	
+
+func _ready():
+	hide()
+	get_tree().paused = false
+
+func _process(delta):
+	if Input.is_action_just_pressed("esc"):
+		if get_tree().paused:
+			resume()
+		else:
+			pause()
+
 func pause():
-	get_tree().paused=true
-	
-func testEsc():
-	if Input.is_action_just_pressed("esc") and get_tree().paused:
-		pause()
-	elif Input.is_action_just_pressed("esc") and get_tree().paused:
-		resume()
+	get_tree().paused = true
+	show()
+	$AnimationPlayer.play("blur")
+
+func resume():
+	get_tree().paused = false
+	$AnimationPlayer.play_backwards("blur")
+	hide()
 
 func _on_resume_pressed() -> void:
-	resume() # Replace with function body.
-
+	resume()
 
 func _on_quit_pressed() -> void:
-	get_tree().quit() # Replace with function body.
+	get_tree().quit()

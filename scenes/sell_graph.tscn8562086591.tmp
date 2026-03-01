@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dkm4sud7pw8px"]
+
+[ext_resource type="Script" uid="uid://cbw1n3djcleha" path="res://scripts/sell_graph.gd" id="1_k1f6m"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_6srsf"]
+
+[node name="Sell_graph" type="Control" unique_id=1532483878]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k1f6m")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=378356557]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.125
+anchor_bottom = 0.22200002
+offset_right = 88.0
+offset_bottom = 88.03999
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=1978081090]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("ImageTexture_6srsf")
+expand_mode = 4

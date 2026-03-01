@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bypgcbvh7ods2"]
+
+[ext_resource type="FontFile" uid="uid://ds011vjjquxkl" path="res://assets/Daydream DEMO.otf" id="1_nt7q6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_x4jx1"]
+font = ExtResource("1_nt7q6")
+font_size = 4
+
+[node name="UI" type="Control" unique_id=736974198]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=494702819]
+layout_mode = 0
+offset_right = 75.0
+offset_bottom = 23.0
+text = "Health:100"
+label_settings = SubResource("LabelSettings_x4jx1")

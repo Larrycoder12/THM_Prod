@@ -21,7 +21,7 @@ const DIRT_BG = Vector2i(0, 1)
 const STONE_BG = Vector2i(0, 0)
 
 const LOAD_RADIUS_X = 14 
-const LOAD_RADIUS_Y = 25 # Increased to ensure floor loads while falling
+const LOAD_RADIUS_Y = 25 
 
 var surface_noise = FastNoiseLite.new()
 var cave_noise = FastNoiseLite.new()

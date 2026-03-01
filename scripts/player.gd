@@ -57,16 +57,16 @@ func _physics_process(delta: float) -> void:
 					var damage = impact_force - BREAK_THRESHOLD
 					take_tile_damage(collider, map_pos, damage)
 		
-		if abs(n.x) > abs(n.y):
-			if n.x > 0: 
-				velocity.x += BOUNCE
-			else: 
-				velocity.x -= BOUNCE
-		else:
-			if n.y > 0: 
-				velocity.y += BOUNCE
-			else: 
-				velocity.y = -1 * BOUNCE * 4
+					if abs(n.x) > abs(n.y):
+						if n.x > 0: 
+							velocity.x += BOUNCE
+						else: 
+							velocity.x -= BOUNCE
+					else:
+						if n.y > 0: 
+							velocity.y += BOUNCE
+						else: 
+							velocity.y = -1 * BOUNCE * 4
 
 func take_tile_damage(layer: TileMapLayer, map_pos: Vector2i, damage: float):
 	if not tile_health.has(map_pos):

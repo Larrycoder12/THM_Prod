@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" uid="uid://di04s4nrt7yos" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://bvtk6ll1lkmcp" path="res://assets/player.png" id="2_g2els"]
+[ext_resource type="PackedScene" uid="uid://r0yxxa3mgjoh" path="res://scenes/flame.tscn" id="3_qhqgy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
 radius = 2.0
-height = 8.0
+height = 6.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1009281542]
 script = ExtResource("1_3vyb7")
@@ -14,8 +15,11 @@ script = ExtResource("1_3vyb7")
 texture = ExtResource("2_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=259260269]
-position = Vector2(-1, 0)
+position = Vector2(-1, 1)
 shape = SubResource("CapsuleShape2D_qhqgy")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=966553553]
 drag_vertical_enabled = true
+
+[node name="Flame" parent="." unique_id=1650887905 instance=ExtResource("3_qhqgy")]
+position = Vector2(0, 1)

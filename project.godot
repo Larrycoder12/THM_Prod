@@ -24,6 +24,10 @@ window/size/window_height_override=720
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
+[dotnet]
+
+project/assembly_name="To the Moon"
+
 [input]
 
 left={

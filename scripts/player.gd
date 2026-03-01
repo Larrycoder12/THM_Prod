@@ -7,6 +7,9 @@ const JETPACK_VELOCITY = -80.0
 const SPEED = 100.0
 const JUMP_VELOCITY = -150.0
 const BREAK_THRESHOLD = 120.0 
+const DEFAULT_HEALTH = 100.0
+
+var tile_health = {}
 
 func _physics_process(delta: float) -> void:
 	var pre_collision_velocity = velocity
@@ -39,14 +42,15 @@ func _physics_process(delta: float) -> void:
 		var collider = col.get_collider()
 		
 		if collider is TileMapLayer:
-			var impact_force = pre_collision_velocity.dot(n)
+			var impact_force = abs(pre_collision_velocity.dot(n))
 			
-			if abs(impact_force) > BREAK_THRESHOLD:
+			if impact_force > BREAK_THRESHOLD:
 				var hit_point = col.get_position()
 				var map_pos = collider.local_to_map(collider.to_local(hit_point - n * 4))
 				
 				if collider.get_cell_source_id(map_pos) != -1:
-					break_block(collider, map_pos)
+					var damage = impact_force - BREAK_THRESHOLD
+					take_tile_damage(collider, map_pos, damage)
 		
 		if abs(n.x) > abs(n.y):
 			if n.x > 0: 
@@ -59,5 +63,12 @@ func _physics_process(delta: float) -> void:
 			else: 
 				velocity.y = -1 * BOUNCE * 4
 
-func break_block(layer: TileMapLayer, map_pos: Vector2i):
-	layer.erase_cell(map_pos)
+func take_tile_damage(layer: TileMapLayer, map_pos: Vector2i, damage: float):
+	if not tile_health.has(map_pos):
+		tile_health[map_pos] = DEFAULT_HEALTH
+	
+	tile_health[map_pos] -= damage
+	
+	if tile_health[map_pos] <= 0:
+		layer.erase_cell(map_pos)
+		tile_health.erase(map_pos)

@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
-const ACCELERATION = 200
+const ACCELERATION = 500
 const MAX_VELOCITY = 200
-const BOUNCE = 40
+const VERT_BOUNCE = 40
+const HORIZ_BOUNCE = 120
 const JETPACK_VELOCITY = -80.0
 const SPEED = 100.0
 const JUMP_VELOCITY = -150.0
@@ -55,14 +56,14 @@ func _physics_process(delta: float) -> void:
 		
 					if abs(n.x) > abs(n.y):
 						if n.x > 0: 
-							velocity.x += BOUNCE
+							velocity.x += HORIZ_BOUNCE
 						else: 
-							velocity.x -= BOUNCE
+							velocity.x -= HORIZ_BOUNCE
 					else:
 						if n.y > 0: 
-							velocity.y += BOUNCE
+							velocity.y += VERT_BOUNCE
 						else: 
-							velocity.y = -1 * BOUNCE * 4
+							velocity.y = -1 * VERT_BOUNCE * 4
 
 func take_tile_damage(layer: TileMapLayer, map_pos: Vector2i, damage: float):
 	if not tile_health.has(map_pos):

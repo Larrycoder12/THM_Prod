@@ -15,18 +15,18 @@ offset_bottom = 40.0
 
 [node name="Start" type="Button" parent="Button Manager" unique_id=262307419]
 layout_mode = 0
-offset_left = 39.0
-offset_top = 3.0
-offset_right = 111.0
-offset_bottom = 43.0
+offset_left = 123.0
+offset_top = 44.0
+offset_right = 195.0
+offset_bottom = 84.0
 icon = ExtResource("2_bqqt6")
 
 [node name="Quit" type="Button" parent="Button Manager" unique_id=764306503]
 layout_mode = 0
-offset_left = 39.0
-offset_top = 45.0
-offset_right = 111.0
-offset_bottom = 85.0
+offset_left = 122.0
+offset_top = 104.0
+offset_right = 194.0
+offset_bottom = 144.0
 icon = ExtResource("3_wu84c")
 
 [connection signal="pressed" from="Button Manager/Start" to="." method="_on_start_pressed"]

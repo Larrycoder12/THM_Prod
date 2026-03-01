@@ -12,6 +12,7 @@ const DEFAULT_HEALTH = 100.0
 const SLAM_VELOCITY = 300
 
 var tile_health = {}
+var slamming = false
 const GRAVITY = 400
 
 func _physics_process(delta: float) -> void:
@@ -19,24 +20,30 @@ func _physics_process(delta: float) -> void:
 
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
+	if is_on_floor():
+		slamming = false
+		
+		
+	if not slamming:
 
-	if Input.is_action_pressed("up"):
-		velocity.y = JETPACK_VELOCITY
+		if Input.is_action_pressed("up"):
+			velocity.y = JETPACK_VELOCITY
 
-	if Input.is_action_pressed("left"):
-		if velocity.x > -1 * MAX_VELOCITY:
-			velocity.x -= ACCELERATION * delta
-	elif Input.is_action_pressed("right"):
-		if velocity.x < MAX_VELOCITY:
-			velocity.x += ACCELERATION * delta
-	else:
-		velocity.x = move_toward(velocity.x, 0, ACCELERATION * delta)
-	
-	if Input.is_action_just_pressed("dash"):
-		if is_on_floor():
-			velocity.x += sign(velocity.x) * SLAM_VELOCITY
+		if Input.is_action_pressed("left"):
+			if velocity.x > -1 * MAX_VELOCITY:
+				velocity.x -= ACCELERATION * delta
+		elif Input.is_action_pressed("right"):
+			if velocity.x < MAX_VELOCITY:
+				velocity.x += ACCELERATION * delta
 		else:
-			velocity.y += SLAM_VELOCITY
+			velocity.x = move_toward(velocity.x, 0, ACCELERATION * delta)
+		
+		if Input.is_action_just_pressed("dash"):
+			if is_on_floor():
+				velocity.x += sign(velocity.x) * SLAM_VELOCITY
+			else:
+				velocity.y += SLAM_VELOCITY
+				slamming = true
 	
 	if velocity.x < 0:
 		$Sprite2D.flip_h = true

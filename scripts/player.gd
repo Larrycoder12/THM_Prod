@@ -6,15 +6,11 @@ const BOUNCE = 40
 const JETPACK_VELOCITY = -80.0
 const SPEED = 100.0
 const JUMP_VELOCITY = -150.0
-<<<<<<< HEAD
 const BREAK_THRESHOLD = 120.0 
 const DEFAULT_HEALTH = 100.0
-
 var tile_health = {}
-=======
-const BREAK_THRESHOLD = 120.0
 const GRAVITY = 300
->>>>>>> origin/main
+
 
 func _physics_process(delta: float) -> void:
 	var pre_collision_velocity = velocity

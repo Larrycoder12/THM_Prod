@@ -3,19 +3,16 @@ extends CharacterBody2D
 const ACCELERATION = 500
 const MAX_VELOCITY = 200
 const VERT_BOUNCE = 40
-const HORIZ_BOUNCE = 120
+const HORIZ_BOUNCE = 80
 const JETPACK_VELOCITY = -80.0
 const SPEED = 100.0
 const JUMP_VELOCITY = -150.0
-<<<<<<< HEAD
 const BREAK_THRESHOLD = 120.0 
 const DEFAULT_HEALTH = 100.0
+const SLAM_VELOCITY = 300
 
 var tile_health = {}
-=======
-const BREAK_THRESHOLD = 120.0
-const GRAVITY = 300
->>>>>>> origin/main
+const GRAVITY = 400
 
 func _physics_process(delta: float) -> void:
 	var pre_collision_velocity = velocity
@@ -34,6 +31,12 @@ func _physics_process(delta: float) -> void:
 			velocity.x += ACCELERATION * delta
 	else:
 		velocity.x = move_toward(velocity.x, 0, ACCELERATION * delta)
+	
+	if Input.is_action_just_pressed("dash"):
+		if is_on_floor():
+			velocity.x += sign(velocity.x) * SLAM_VELOCITY
+		else:
+			velocity.y += SLAM_VELOCITY
 	
 	if velocity.x < 0:
 		$Sprite2D.flip_h = true
@@ -58,16 +61,16 @@ func _physics_process(delta: float) -> void:
 					var damage = impact_force - BREAK_THRESHOLD
 					take_tile_damage(collider, map_pos, damage)
 		
-					if abs(n.x) > abs(n.y):
-						if n.x > 0: 
-							velocity.x += HORIZ_BOUNCE
-						else: 
-							velocity.x -= HORIZ_BOUNCE
-					else:
-						if n.y > 0: 
-							velocity.y += VERT_BOUNCE
-						else: 
-							velocity.y = -1 * VERT_BOUNCE * 4
+				if abs(n.x) > abs(n.y):
+					if n.x > 0: 
+						velocity.x += HORIZ_BOUNCE
+					else: 
+						velocity.x -= HORIZ_BOUNCE
+				else:
+					if n.y > 0: 
+						velocity.y += VERT_BOUNCE
+					else: 
+						velocity.y = -1 * VERT_BOUNCE * 4
 
 func take_tile_damage(layer: TileMapLayer, map_pos: Vector2i, damage: float):
 	if not tile_health.has(map_pos):

@@ -46,6 +46,10 @@ font_size = 8
 font = ExtResource("6_j7wrs")
 font_size = 8
 
+[sub_resource type="LabelSettings" id="LabelSettings_hh0fu"]
+font = ExtResource("6_j7wrs")
+font_size = 8
+
 [node name="Node2D" type="Node2D" unique_id=1713976250]
 script = ExtResource("1_4vge2")
 
@@ -83,10 +87,12 @@ text = "Label"
 label_settings = SubResource("LabelSettings_fws66")
 
 [node name="Timer" type="Label" parent="CanvasLayer" unique_id=598753096]
-offset_left = 110.0
-offset_right = 157.0
-offset_bottom = 23.0
+offset_left = 101.0
+offset_top = -1.0
+offset_right = 148.0
+offset_bottom = 22.0
 text = "Time: "
+label_settings = SubResource("LabelSettings_hh0fu")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=433305011]
 position = Vector2(108, 162)

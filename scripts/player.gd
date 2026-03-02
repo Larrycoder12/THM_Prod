@@ -118,7 +118,7 @@ func update_timer_display():
 	var minutes = int(time_left) / 60
 	var seconds = int(time_left) % 60
 	# Assuming you have a dedicated label for the timer
-	timerz.text = "%02d:%02d" % [minutes, seconds]
+	timerz.text = "Time: " + "%02d:%02d" % [minutes, seconds]
 func _on_timer_out():
 	print("Time is up!")
 	tpto(spawn_point.global_position)

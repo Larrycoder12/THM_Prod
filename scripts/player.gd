@@ -21,11 +21,27 @@ var dash_cooldown_timer = 0.0
 var m_coins = 0
 var u_coins = 0
 var ram = 0
-
+@onready var timerz: Label = $"../CanvasLayer/Timer"
 @onready var label: Label = $"../CanvasLayer/Label"
 @onready var status_label: Label = $"../CanvasLayer/StatusLabel"
+@onready var spawn_point: Marker2D = $"../Marker2D"
 
+var time_left = 10.0
+var timer_active = false
+func timer(seconds: float):
+	time_left = seconds
+	timer_active = true
 func _physics_process(delta: float) -> void:
+	if timer_active and time_left > 0:
+		time_left -= delta
+		if time_left <= 0:
+			time_left = 0
+			timer_active = false
+			_on_timer_out()
+	update_timer_display()
+	
+	
+	
 	var pre_v = velocity
 	
 	if dash_cooldown_timer > 0: 
@@ -81,7 +97,6 @@ func _physics_process(delta: float) -> void:
 	# Update Status Label (Fuel and Slam)
 	var dash_text = "READY" if dash_cooldown_timer <= 0 else str(snapped(dash_cooldown_timer, 0.1)) + "s"
 	status_label.text = "FUEL: %d%%\nSLAM: %s" % [int(current_fuel), dash_text]
-
 func take_tile_damage(layer: TileMapLayer, mpos: Vector2i, damage: float):
 	if not tile_health.has(mpos): 
 		tile_health[mpos] = DEFAULT_HEALTH
@@ -96,3 +111,20 @@ func take_tile_damage(layer: TileMapLayer, mpos: Vector2i, damage: float):
 			Vector2i(0, 0): u_coins += 1
 			Vector2i(0, 1): m_coins += 1
 			Vector2i(0, 2), Vector2i(1, 2): ram += 1
+			
+
+func update_timer_display():
+	# Formats seconds into MM:SS
+	var minutes = int(time_left) / 60
+	var seconds = int(time_left) % 60
+	# Assuming you have a dedicated label for the timer
+	timerz.text = "%02d:%02d" % [minutes, seconds]
+func _on_timer_out():
+	print("Time is up!")
+	tpto(spawn_point.global_position)
+func tpto(tpos: Vector2):
+	global_position = tpos
+	velocity = Vector2.ZERO 
+	slamming = false 
+func _ready():
+	timer(10)

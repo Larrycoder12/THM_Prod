@@ -1,3 +1,28 @@
 [gd_scene format=3 uid="uid://b37gs8mlc3yn8"]
 
-[node name="selling_minigame" type="Node2D" unique_id=1027780670]
+[ext_resource type="PackedScene" uid="uid://dkm4sud7pw8px" path="res://scenes/sell_graph.tscn" id="1_nxrkg"]
+
+[node name="selling_mooncoin" type="Node2D" unique_id=1027780670]
+
+[node name="Control" type="Control" parent="." unique_id=1992451495]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sell_graph" parent="." unique_id=1532483878 instance=ExtResource("1_nxrkg")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Sell_button" type="Button" parent="Sell_graph" unique_id=111964099]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 51.0
+offset_right = 292.0
+offset_bottom = 104.0
+text = "Sell"
+
+[connection signal="pressed" from="Sell_graph/Sell_button" to="Sell_graph" method="_on_sell_button_pressed"]

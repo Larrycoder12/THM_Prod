@@ -21,6 +21,7 @@ var dash_cooldown_timer = 0.0
 var m_coins = 0
 var u_coins = 0
 var ram = 0
+var money = 0
 @onready var timerz: Label = $"../CanvasLayer/Timer"
 @onready var label: Label = $"../CanvasLayer/Label"
 @onready var status_label: Label = $"../CanvasLayer/StatusLabel"
@@ -31,7 +32,14 @@ var timer_active = false
 func timer(seconds: float):
 	time_left = seconds
 	timer_active = true
+	
+func _ready():
+	timer(60)
+	money = GameState.money
 func _physics_process(delta: float) -> void:
+	
+	
+	
 	if timer_active and time_left > 0:
 		time_left -= delta
 		if time_left <= 0:
@@ -92,7 +100,7 @@ func _physics_process(delta: float) -> void:
 					velocity.y = VERT_BOUNCE if n.y > 0 else -VERT_BOUNCE * 4
 	
 	# Update Resource Label
-	label.text = "M Coins: %d\nU Coins: %d\nRAM: %d" % [m_coins, u_coins, ram]
+	label.text = "M Coins: %d\nU Coins: %d\nRAM: %d\nMoney: %d" % [m_coins, u_coins, ram, money]
 	
 	# Update Status Label (Fuel and Slam)
 	var dash_text = "READY" if dash_cooldown_timer <= 0 else str(snapped(dash_cooldown_timer, 0.1)) + "s"
@@ -110,7 +118,9 @@ func take_tile_damage(layer: TileMapLayer, mpos: Vector2i, damage: float):
 		match atlas:
 			Vector2i(0, 0): u_coins += 1
 			Vector2i(0, 1): m_coins += 1
-			Vector2i(0, 2), Vector2i(1, 2): ram += 1
+			Vector2i(0, 2), Vector2i(1, 2): 
+				ram += 1
+				money -= 10
 			
 
 func update_timer_display():
@@ -122,9 +132,11 @@ func update_timer_display():
 func _on_timer_out():
 	print("Time is up!")
 	tpto(spawn_point.global_position)
+	GameState.money = money
+	GameState.m_coins = m_coins
+	GameState.u_coins = u_coins
+	get_tree().change_scene_to_file("res://scenes/sell_graph.tscn")
 func tpto(tpos: Vector2):
 	global_position = tpos
 	velocity = Vector2.ZERO 
 	slamming = false 
-func _ready():
-	timer(10)

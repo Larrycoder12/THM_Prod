@@ -208,7 +208,11 @@ func sell_mooncoin(sell_price):
 		revealing = true
 		label2.text = "Selling: Ubercoin"
 		reveal_columns(0)
+		GameState.money += GameState.m_coins*sell_price
 		n += 1
 	else:
-		pass
+		GameState.money += GameState.u_coins*sell_price
+		await get_tree().create_timer(3.0).timeout
+		get_tree().change_scene_to_file("res://scenes/node_2d.tscn")
+		
 	

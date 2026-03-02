@@ -7,10 +7,12 @@ const H := 32
 @onready var sell_button: Button = $Sell_mooncoin
 @onready var reveal_timer: Timer = $Timer
 @onready var label: Label = $VBoxContainer/Label
-
+@onready var label2: Label = $Label2
 var img: Image
 var tex: ImageTexture
 var price = 0
+
+var n = 0
 
 var prices: Array = []
 var matrix: Array = []
@@ -22,8 +24,12 @@ var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 
-func reveal_columns():
-	prices = generate_prices_ubercoin(5) # <-- IMPORTANT: no "var"
+func reveal_columns(n):
+	if n == 1:
+		prices = generate_prices_mooncoin(5) # <-- IMPORTANT: no "var"
+	else:
+		prices = generate_prices_ubercoin(5)
+		
 	matrix = make_zero_matrix()          # <-- IMPORTANT: no "var"
 
 	reveal_i = 0
@@ -47,7 +53,7 @@ func _ready() -> void:
 	
 	graph_rect.texture = tex
 	
-	reveal_columns()
+	reveal_columns(1)
 	
 	#var prices = generate_prices(4)
 	#var matrix = generate_matrix(prices)
@@ -197,4 +203,12 @@ func _on_sell_pressed() -> void:
 	sell_mooncoin(sell_price)
 
 func sell_mooncoin(sell_price):
-	pass
+	print("Sold for " + str(sell_price))
+	if n == 0:
+		revealing = true
+		label2.text = "Selling: Ubercoin"
+		reveal_columns(0)
+		n += 1
+	else:
+		pass
+	

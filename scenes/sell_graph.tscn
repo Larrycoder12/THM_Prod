@@ -1,8 +1,14 @@
 [gd_scene format=3 uid="uid://dkm4sud7pw8px"]
 
 [ext_resource type="Script" uid="uid://cbw1n3djcleha" path="res://scripts/sell_graph.gd" id="1_k1f6m"]
+[ext_resource type="Texture2D" uid="uid://cmbow2yy68tjw" path="res://assets/Sell-button.png" id="2_6srsf"]
+[ext_resource type="FontFile" uid="uid://cqrh5ltnhxkb3" path="res://assets/Minecraftia-Regular.ttf" id="3_pf7qs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4mhy8"]
+font = ExtResource("3_pf7qs")
 
 [sub_resource type="LabelSettings" id="LabelSettings_k1f6m"]
+font = ExtResource("3_pf7qs")
 
 [sub_resource type="ImageTexture" id="ImageTexture_6srsf"]
 
@@ -17,20 +23,29 @@ script = ExtResource("1_k1f6m")
 
 [node name="Sell_mooncoin" type="Button" parent="." unique_id=347761957]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 92.0
-offset_right = 95.0
-offset_bottom = 123.0
-text = "SELL"
+offset_left = 175.0
+offset_top = 65.0
+offset_right = 311.0
+offset_bottom = 137.0
+icon = ExtResource("2_6srsf")
+
+[node name="Label2" type="Label" parent="." unique_id=1355094349]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 9.0
+offset_right = 318.0
+offset_bottom = 37.0
+text = "Selling: Mooncoin"
+label_settings = SubResource("LabelSettings_4mhy8")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=378356557]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.125
 anchor_bottom = 0.22200002
-offset_left = 96.0
+offset_left = 32.0
 offset_top = 12.0
-offset_right = 184.0
+offset_right = 120.0
 offset_bottom = 139.04
 
 [node name="Label" type="Label" parent="VBoxContainer" unique_id=1355536799]
